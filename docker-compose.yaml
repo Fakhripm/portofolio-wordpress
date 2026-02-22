@@ -6,7 +6,7 @@ services:
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: pleiades
-      WORDPRESS_DB_PASSWORD: REDACTED_PLEASE_ROTATE_DB_PASSWORD
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-please_change_me}
       WORDPRESS_DB_NAME: wpdb
     volumes:
       - ./wp-config.php:/var/www/html/wp-config.php:ro
@@ -19,8 +19,8 @@ services:
     environment:
       MYSQL_DATABASE: wpdb
       MYSQL_USER: pleiades
-      MYSQL_PASSWORD: REDACTED_PLEASE_ROTATE_DB_PASSWORD
-      MYSQL_ROOT_PASSWORD: REDACTED_PLEASE_ROTATE_ROOT
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-please_change_me}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-please_change_root}
     volumes:
       - db_data:/var/lib/mysql
 
@@ -30,7 +30,7 @@ services:
       - "8081:80"
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: REDACTED_PLEASE_ROTATE_ROOT
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-please_change_root}
     depends_on:
       - db
 
