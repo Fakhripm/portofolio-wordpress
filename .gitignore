@@ -46,3 +46,34 @@ wp-config.php
 # Note: If you wish to whitelist themes,
 # uncomment the next line
 #/wp-content/themes
+
+.env
+
+# Local editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Node / PHP deps
+node_modules/
+vendor/
+
+# Docker / local data
+db_data/
+.env.local
+.env.*
+
+# Ignore most of wp-content to avoid committing plugins/themes/uploads
+/wp-content/plugins/
+/wp-content/themes/
+/wp-content/uploads/
+/wp-content/upgrade/
+/wp-content/cache/
+/wp-content/wpo-cache/
+/wp-content/aiowps_backups/
+/wp-content/elementor/cache/
+
+# Ignore backups and exports
+*.sql
+*.sql.gz
+*.tar.gz

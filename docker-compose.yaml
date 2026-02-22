@@ -1,0 +1,38 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "8181:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: pleiades
+      WORDPRESS_DB_PASSWORD: REDACTED_PLEASE_ROTATE_DB_PASSWORD
+      WORDPRESS_DB_NAME: wpdb
+    volumes:
+      - ./wp-config.php:/var/www/html/wp-config.php:ro
+      - ./wp-content:/var/www/html/wp-content
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_DATABASE: wpdb
+      MYSQL_USER: pleiades
+      MYSQL_PASSWORD: REDACTED_PLEASE_ROTATE_DB_PASSWORD
+      MYSQL_ROOT_PASSWORD: REDACTED_PLEASE_ROTATE_ROOT
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: REDACTED_PLEASE_ROTATE_ROOT
+    depends_on:
+      - db
+
+volumes:
+  db_data:
