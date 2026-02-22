@@ -62,6 +62,7 @@ vendor/
 db_data/
 .env.local
 .env.*
+!.env.example
 
 # Cloudflared credentials (do not commit actual tunnel JSON)
 cloudflared/TUNNEL_ID_PLACEHOLDER.json
