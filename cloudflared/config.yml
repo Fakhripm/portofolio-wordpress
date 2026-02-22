@@ -1,0 +1,18 @@
+## cloudflared config template - update placeholders before use
+# Replace my-wp-tunnel with the tunnel name you create
+# Replace TUNNEL_ID_PLACEHOLDER.json with the credentials file created by cloudflared
+
+tunnel: my-wp-tunnel
+# cloudflared will read tunnel credentials from the Docker secret path when
+# run as a Compose secret. The secret is available at /run/secrets/cloudflared_creds
+credentials-file: /run/secrets/cloudflared_creds
+
+ingress:
+  - hostname: fakhripm-dev.my.id               # replace with your domain
+    # route requests to the host's mapped port 8181 (wordpress is exposed to host)
+    service: http://host.docker.internal:8181
+
+  - hostname: phpmyadmin.fakhripm-dev.my.id    # optional; replace or remove if undesired
+    service: http://phpmyadmin:80
+
+  - service: http_status:404

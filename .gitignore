@@ -63,6 +63,9 @@ db_data/
 .env.local
 .env.*
 
+# Cloudflared credentials (do not commit actual tunnel JSON)
+cloudflared/TUNNEL_ID_PLACEHOLDER.json
+
 # Ignore most of wp-content to avoid committing plugins/themes/uploads
 /wp-content/plugins/
 /wp-content/themes/

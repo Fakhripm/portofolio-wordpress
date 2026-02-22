@@ -34,5 +34,29 @@ services:
     depends_on:
       - db
 
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    depends_on:
+      - wordpress
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./cloudflared/config.yml:/etc/cloudflared/config.yml:ro
+      - ./cloudflared/TUNNEL_ID_PLACEHOLDER.json:/etc/cloudflared/credentials.json:ro
+      - /home/pleiades/.cloudflared/cert.pem:/etc/cloudflared/cert.pem:ro
+    environment:
+      - TUNNEL_ORIGIN_CERT=/etc/cloudflared/cert.pem
+    command:
+      - tunnel
+      - run
+      - --credentials-file
+      - /etc/cloudflared/credentials.json
+      - my-wp-tunnel
+
 volumes:
   db_data:
+
+secrets:
+  cloudflared_creds:
+    file: ./cloudflared/TUNNEL_ID_PLACEHOLDER.json
