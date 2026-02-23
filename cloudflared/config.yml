@@ -3,9 +3,7 @@
 # Replace TUNNEL_ID_PLACEHOLDER.json with the credentials file created by cloudflared
 
 tunnel: my-wp-tunnel
-# cloudflared will read tunnel credentials from the Docker secret path when
-# run as a Compose secret. The secret is available at /run/secrets/cloudflared_creds
-credentials-file: /run/secrets/cloudflared_creds
+credentials-file: /etc/cloudflared/credentials.json
 
 ingress:
   - hostname: fakhripm-dev.my.id               # replace with your domain
