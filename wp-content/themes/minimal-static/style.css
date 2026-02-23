@@ -1,0 +1,13 @@
+/*
+Theme Name: Minimal Static
+Theme URI: https://fakhripm-dev.my.id/
+Author: Assistant
+Description: Minimal theme that outputs simple static HTML/CSS while keeping WordPress available.
+Version: 1.0
+License: GPLv2 or later
+Text Domain: minimal-static
+*/
+
+body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin: 2rem; color: #111; background: #fff; }
+h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+p { color: #333; }

@@ -1,0 +1,223 @@
+@layer tokens, base, layout, components;
+
+@layer tokens {
+  :root {
+    --bg-1: #0b1114; /* deep background */
+    --bg-2: #13161a; /* gradient mid */
+    --panel-bg: rgba(24,32,38,0.92);
+    --text-main: #e9f2f6; /* primary readable white/grey (slightly brighter) */
+    --text-muted: #c1ced3; /* secondary grey (higher contrast) */
+    --link: #66bfff; /* brighter blue link for improved contrast */
+    --accent: rgba(255,255,255,0.06);
+    --thumb-width: 13.75rem; /* 220px */
+    --thumb-height: 7.5rem;  /* 120px */
+    --thumb-small-height: 4.5rem; /* 72px */
+    --panel-padding: 1.125rem; /* 18px */
+    --max-width: 61.25rem; /* 980px */
+    --right-width: 18.75rem; /* 300px */
+    --gap: 1.625rem; /* 26px */
+    --name-font-size: 1.875rem; /* 30px */
+  }
+}
+
+@layer base {
+  /* page background and typography for front page. Use !important here to override upstream body/background rules when necessary. */
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-1) !important;
+    background-image: radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0.1px, transparent 0.1px),
+                      linear-gradient(180deg, var(--bg-2) 0%, rgba(19,22,26,1) 60%, rgba(32,27,31,1) 100%) !important;
+    background-size: 0.75rem 0.75rem, auto;
+    color: var(--text-main);
+    font-family: 'Motiva Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* Slight global brightening for front page to make colors a bit lighter */
+    filter: brightness(1.06);
+  }
+}
+
+/* Keep steam-portfolio layout spacing */
+.steam-portfolio { min-height: 85vh; padding: calc(var(--panel-padding) * 2); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+/* Hide common top-level header containers that may appear before .steam-portfolio */
+/* hide common top-level header containers on home/front page (avoid !important) */
+/* hide common top-level header containers on home/front page (use !important to ensure removal of parent/header output) */
+body.home > header,
+body.home > .site-header,
+body.home > #masthead,
+body.home > .header,
+body.home > .site-branding,
+body.home > h1,
+body.home > .site-title,
+body.home > hr,
+body.front-page > header,
+body.front-page > .site-header,
+body.front-page > #masthead,
+body.front-page > .header,
+body.front-page > .site-branding,
+body.front-page > h1,
+body.front-page > .site-title,
+body.front-page > hr {
+  display: none !important;
+}
+
+/* Ensure the main steam container sits centered and doesn't get extra top margin from parent */
+.steam-portfolio { margin-top: var(--panel-padding); }
+
+/* Force consistent link color across header, body and footer on front page so visited links keep same color after navigation */
+/* Links on front page: prefer using the theme container so overrides are scoped */
+.steam-portfolio a,
+.steam-portfolio a:visited,
+.steam-portfolio a:active,
+.steam-portfolio a:focus,
+.steam-portfolio header a,
+.steam-portfolio footer a {
+  color: var(--link);
+  text-decoration: none;
+}
+.steam-portfolio a:hover { color: #cfeeff; }
+
+/* Headings and small typography tweaks to match Steam layout */
+body.home .steam-name { font-size: var(--h1); font-weight:700; color: var(--text-main); margin:0; }
+body.home .steam-sub { color: var(--text-muted); font-size: var(--h6); margin-top:0.375rem; }
+body.home .level-card { font-size: var(--h4); }
+
+.steam-topbar { display: flex; align-items: center; gap: 1.375rem; margin-bottom: 1.25rem; }
+  .steam-avatar img { width: 8rem; height:8rem; border-radius:0.5rem; border: 0.125rem solid rgba(255,255,255,0.06); box-shadow: 0 0.375rem 1.125rem rgba(2,6,8,0.6); }
+.steam-profile { flex: 1; }
+.steam-name { margin: 0; font-size: var(--h2); color: var(--text-main); text-shadow: 0 0.0625rem 0 rgba(0,0,0,0.6); }
+.steam-sub { color: var(--text-muted); margin-top: 0.375rem; font-size:var(--h5); }
+.steam-level { text-align: right; min-width:7.5rem; }
+  .level-card { background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); color:var(--text-main); padding:0.625rem 0.875rem; border-radius:0.5rem; font-weight:600; box-shadow: inset 0 -0.0625rem 0 var(--accent); display:flex; align-items:center; justify-content:center; text-align:center; }
+
+.steam-main { display: flex; gap: var(--gap); align-items: flex-start; max-width: var(--max-width); margin: 0 auto; }
+.steam-left { flex: 1 1 0; max-width:40.625rem; }
+.steam-right { width: var(--right-width); }
+.panel { background: linear-gradient(180deg, var(--panel-bg), rgba(8,10,12,0.78)); border-radius:0.5rem; padding:var(--panel-padding); margin-bottom:var(--panel-padding); box-shadow: 0 0.5rem 1.875rem rgba(0,0,0,0.6); border: 0.0625rem solid var(--accent); }
+.panel h2, .panel h3, .panel h4 { margin: 0 0 0.75rem 0; color:var(--text-main); }
+
+.recent-activity h2 { display:flex; justify-content:space-between; align-items:center; }
+.recent-activity h2::after { content: ""; }
+
+.activity-card { display:flex; gap:0.875rem; padding:0.75rem 0; border-top:1px solid var(--accent); align-items:center; min-height:5.125rem; }
+.activity-card:first-child { border-top: none; }
+.activity-card .thumb img { width: var(--thumb-width); height:var(--thumb-small-height); object-fit:cover; border-radius:0.375rem; display:block; }
+.thumb-fallback { background: linear-gradient(90deg,#1b2630 0%, #0f1a22 100%); width:var(--thumb-width); height:var(--thumb-height); border-radius:0.375rem; }
+.thumb-fallback-small { background: linear-gradient(90deg,#1b2630 0%, #0f1a22 100%); width:var(--thumb-width); height:var(--thumb-small-height); border-radius:0.375rem; }
+
+/* Frame wrapper to give thumbnails a consistent card-like appearance */
+.thumb-frame { width:var(--thumb-width); height:var(--thumb-height); border-radius:0.375rem; overflow:hidden; display:flex; align-items:center; justify-content:center; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06)); border:0.0625rem solid rgba(255,255,255,0.03); box-shadow: 0 0.375rem 1.125rem rgba(0,0,0,0.6); }
+.meta .activity-title { color:var(--text-main); font-weight:700; text-decoration:none; font-size:var(--h4); }
+.meta .activity-sub { color:var(--text-muted); font-size:var(--tiny); margin-top:0.375rem; }
+
+.project-card { display:flex; gap:0.875rem; padding:0.75rem; border-top:1px solid rgba(255,255,255,0.03); align-items:center; }
+.project-thumb img { width:var(--thumb-width); height:var(--thumb-height); object-fit:cover; border-radius:0.375rem; box-shadow: 0 0.375rem 1.25rem rgba(0,0,0,0.6); display:block; }
+.project-meta strong { display:block; color:var(--text-main); font-size:var(--h4); }
+.project-excerpt { color:var(--text-muted); font-size:var(--h6); margin-top:0.375rem; }
+
+.summary-list { list-style:none; padding:0; margin:0; color:var(--text-muted); }
+.summary-list li { padding:0.5rem 0; border-bottom:1px dashed rgba(255,255,255,0.02); }
+
+.sidebar-links ul { list-style:none; padding:0; margin:0; }
+.sidebar-links li { padding:0.375rem 0; }
+.sidebar-links a { color:var(--link); text-decoration:none; }
+
+/* Global link rules inside the theme container so visited links keep the same color */
+.steam-portfolio a,
+.steam-portfolio a:visited,
+.steam-portfolio a:active,
+.steam-portfolio a:focus {
+  color: var(--link);
+  outline: none;
+}
+.steam-portfolio a:hover {
+  color: #cfeeff; /* slight brightening on hover only */
+}
+
+/* Ensure consistent panel paddings and inner spacing */
+.panel { padding: var(--panel-padding); }
+.panel .content { padding: 0.375rem 0; }
+
+/* Make buttons/links that look like Steam's slightly rounded */
+.btn, .button, .portfolio-button { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08)); color:var(--text-main); border-radius:0.375rem; padding:0.5rem 0.75rem; border:0.0625rem solid rgba(255,255,255,0.03); }
+
+/* Nav buttons used by the theme (fallback links) */
+.steam-nav .nav-btn,
+.steam-nav .nav-btn:link,
+.steam-nav .nav-btn:visited {
+  display:inline-block;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
+  color: var(--text-main);
+  border-radius:0.375rem;
+  padding:0.5rem 0.75rem;
+  border:0.0625rem solid rgba(255,255,255,0.03);
+  text-decoration:none;
+}
+.steam-nav .nav-btn:hover { transform: translateY(-0.0625rem); box-shadow: 0 0.375rem 0.875rem rgba(2,6,23,0.12); }
+
+/* Right column badges area to mimic Steam badge strip */
+.badges-panel { display:flex; flex-direction:column; }
+.badges-panel .badges-row { display:flex; gap:0.625rem; align-items:center; flex-wrap:wrap; align-content:flex-start; overflow:hidden; }
+.badges-panel .badge-img { width:3rem; height:3rem; flex: 0 0 3rem; border-radius:0.375rem; background:#0f1720; box-shadow: 0 0.5rem 1.25rem rgba(0,0,0,0.6); border:0.0625rem solid var(--accent); object-fit:cover; }
+
+/* Right column translucent panel with purple tint to match Steam */
+.steam-right .panel { background: linear-gradient(180deg, rgba(18,18,24,0.72), rgba(38,22,28,0.46)); border-radius:0.625rem; padding:var(--panel-padding); }
+
+@media (max-width: 56.25rem) {
+  .steam-main { flex-direction: column; }
+  .steam-right { width: 100%; }
+  .activity-card .thumb img, .project-thumb img { width: 100%; height: auto; }
+}
+
+/* Small tweaks to typography and links to mimic Steam */
+.activity-card .meta .activity-title, .project-meta strong { color: #eaf2f7; }
+.activity-card .meta .activity-sub, .project-excerpt { color: #9aa7ac; }
+.steam-topbar { padding-bottom: 0.5rem; border-bottom: 0.0625rem solid rgba(255,255,255,0.03); margin-bottom: var(--panel-padding); }
+
+/* Footer: blend into dark page and keep link colors consistent */
+/* Footer: scoped to the theme container to avoid global !important overrides */
+.steam-portfolio footer,
+.steam-portfolio .site-footer,
+.steam-portfolio .entry-footer {
+  background: transparent;
+  color: #9aa7ac;
+  border-top: 0.0625rem solid rgba(255,255,255,0.03);
+}
+.steam-portfolio footer a,
+.steam-portfolio .site-footer a {
+  color: var(--link);
+}
+
+/* Mobile: ensure header and footer are white for readability on small screens */
+@media (max-width:45rem) {
+  .steam-topbar,
+  .steam-topbar-inner {
+    background: #ffffff !important;
+    color: #0b1220 !important;
+    border-bottom-color: rgba(0,0,0,0.08) !important;
+  }
+
+  .steam-topbar .steam-name,
+  .steam-topbar .steam-sub,
+  .steam-nav .nav-btn,
+  .nav-btn {
+    color: #0b1220 !important;
+  }
+
+  .steam-portfolio footer,
+  .steam-portfolio .site-footer,
+  .steam-portfolio .entry-footer {
+    background: #ffffff !important;
+    color: #0b1220 !important;
+    border-top-color: rgba(0,0,0,0.08) !important;
+  }
+
+  .steam-portfolio footer a,
+  .steam-portfolio .site-footer a,
+  .steam-portfolio .entry-footer a {
+    color: #0b66cc !important;
+  }
+}
+
+/* end of file */
+
