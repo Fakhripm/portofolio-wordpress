@@ -53,6 +53,8 @@ wp-config.php
 .vscode/
 .idea/
 .DS_Store
+scripts/
+plans/
 
 # Node / PHP deps
 node_modules/
@@ -69,7 +71,6 @@ cloudflared/TUNNEL_ID_PLACEHOLDER.json
 
 # Ignore most of wp-content to avoid committing plugins/themes/uploads
 /wp-content/plugins/
-/wp-content/themes/
 /wp-content/uploads/
 /wp-content/upgrade/
 /wp-content/cache/
