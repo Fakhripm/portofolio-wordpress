@@ -1,0 +1,17 @@
+# Sample env-based wp-config for repository (do NOT commit real secrets)
+# Copy to wp-config.php locally and fill values or set env vars.
+
+WORDPRESS_DB_NAME=wpdb
+WORDPRESS_DB_USER=pleiades
+WORDPRESS_DB_PASSWORD=change_me
+WORDPRESS_DB_HOST=db
+
+# WordPress auth salts (generate via https://api.wordpress.org/secret-key/1.1/salt/)
+AUTH_KEY=put-your-unique-phrase-here
+SECURE_AUTH_KEY=put-your-unique-phrase-here
+LOGGED_IN_KEY=put-your-unique-phrase-here
+NONCE_KEY=put-your-unique-phrase-here
+AUTH_SALT=put-your-unique-phrase-here
+SECURE_AUTH_SALT=put-your-unique-phrase-here
+LOGGED_IN_SALT=put-your-unique-phrase-here
+NONCE_SALT=put-your-unique-phrase-here

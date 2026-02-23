@@ -1,0 +1,9 @@
+{
+  "AccountTag": "60386021250e91b530a0057e77f54f61",
+  "TunnelSecret": "<PUT_REAL_SECRET_HERE>",
+  "TunnelID": "6228335c-cee0-4b10-837a-e4119196f835",
+  "Endpoint": ""
+}
+
+# NOTE: Move real tunnel JSON to your deployment host and ensure
+# cloudflared/TUNNEL_ID_PLACEHOLDER.json is listed in .gitignore.
